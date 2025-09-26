@@ -284,7 +284,10 @@ export default function Suggestion  () {
               onPress={showNextSuggestion}
               disabled={!hasMoreSuggestions}
             >
-              <Text style={{ color: 'white', fontSize: 24, fontWeight: 'bold' }}>→</Text>
+              <Svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <Path d="M2.55005 10.8334C2.75456 12.6616 3.62388 14.3509 4.99266 15.58C6.36145 16.8091 8.13423 17.4922 9.97385 17.4995C11.8135 17.5068 13.5916 16.8377 14.9701 15.6195C16.3486 14.4013 17.2312 12.7189 17.4502 10.8924C17.6692 9.06583 17.2093 7.2225 16.1578 5.71295C15.1064 4.20341 13.5368 3.13296 11.7476 2.70518C9.95837 2.2774 8.07435 2.52213 6.45381 3.39283C4.83327 4.26352 3.58927 5.69946 2.95838 7.42753" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                <Path d="M2.5 3.33417V7.50083H6.66667" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </Svg>
             </TouchableOpacity>
             <Text style={{ color: 'white', fontSize: 12, fontWeight: 'medium' }}>Otra</Text>
           </View>
@@ -330,7 +333,9 @@ export default function Suggestion  () {
                 Alert.alert('Guardar', 'Funcionalidad de guardar pendiente');
               }}
             >
-              <Text style={{ color: 'white', fontSize: 24 }}>+</Text>
+              <Svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                <Path d="M15 5.83333V17.5L10 14.1667L5 17.5V5.83333C5 4.94928 5.35119 4.10143 5.97631 3.47631C6.60143 2.85119 7.44928 2.5 8.33333 2.5H11.6667C12.5507 2.5 13.3986 2.85119 14.0237 3.47631C14.6488 4.10143 15 4.94928 15 5.83333Z" stroke="white" strokeWidth="1.25" strokeLinecap="round" strokeLinejoin="round"/>
+              </Svg>
             </TouchableOpacity>
             <Text style={{ color: 'white', fontSize: 12, fontWeight: 'medium' }}>Guardar</Text>
           </View>
