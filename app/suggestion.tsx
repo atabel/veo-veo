@@ -10,7 +10,7 @@ import Svg, { Defs, Path, Rect, Stop, LinearGradient as SvgLinearGradient } from
 
 export default function Suggestion  () {
   const params = useLocalSearchParams();
-  const { mood, availableTime, audience } = params;
+  const { genres, availableTime, audience } = params;
 
   const [suggestions, setSuggestions] = React.useState<MovieOrSeries[]>([]);
   const [suggestionIndex, setSuggestionIndex] = React.useState(0);
@@ -51,14 +51,14 @@ export default function Suggestion  () {
   };
 
   React.useEffect(() => {
-    api.getSuggestion({availableTime: Number(availableTime)}).then((data) => {
+    api.getSuggestion({availableTime: availableTime ? Number(availableTime) : undefined, genres: genres ? String(genres) : undefined}).then((data) => {
       setSuggestions(data);
       setStatus("loaded");
     }).catch((error) => {
       console.error(error);
       setStatus("error");
     });
-  }, [availableTime]);
+  }, [availableTime, genres]);
 
   const rotation = useSharedValue(0);
   const opacity = useSharedValue(0.3);

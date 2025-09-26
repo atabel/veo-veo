@@ -31,7 +31,15 @@ const titlesCache = new Map<number, MovieOrSeries>();
 export const api = {
     getSuggestion: async ({availableTime, genres}: {availableTime?: number; genres?: string} = {}): Promise<MovieOrSeries[]> => {
         try {
-            const response = await fetch(`${API_URL}/recommend`);
+            const params = new URLSearchParams();
+            if (availableTime) {
+                params.append('availableTime', availableTime.toString());
+            }
+            if (genres) {
+                params.append('genres', genres);
+            }
+            console.log('Fetching suggestion:', `${API_URL}/recommend?${params.toString()}`);
+            const response = await fetch(`${API_URL}/recommend?${params.toString()}`);
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }

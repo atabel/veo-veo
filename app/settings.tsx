@@ -8,6 +8,7 @@ export interface UserSettings {
   mood: MoodOption;
   availableTime: number;
   audience: AudienceOption;
+  genres: string;
 }
 
 interface SettingsProps {
@@ -16,8 +17,8 @@ interface SettingsProps {
   onSettingsSave?: (settings: UserSettings) => void;
 }
 
-type MoodOption = "Adrenalina pura" | "corazón sensible" | "risas garantizadas" | "mente curiosa" | "intriga constante" | "suspenso atrapante" | "escape total";
-type TimeOption = "menos de 30 minutos" | "entre 30 y 90 minutos" | "alrededor de una hora y media" | "mas de dos horas";
+type MoodOption = "Adrenalina pura" | "Corazón sensible" | "Risas garantizadas" | "Mente curiosa" | "Intriga constante" | "Suspenso atrapante" | "Escape total";
+type TimeOption = "Menos de 30 minutos" | "Entre 30 y 90 minutos" | "Alrededor de una hora y media" | "Más de dos horas";
 type AudienceOption = "adultos" | "adolescentes" | "con niños";
 
 export default function Settings({ isVisible, onClose, onSettingsSave }: SettingsProps) {
@@ -29,19 +30,19 @@ export default function Settings({ isVisible, onClose, onSettingsSave }: Setting
 
   const moodOptions: MoodOption[] = [
     "Adrenalina pura",
-    "corazón sensible", 
-    "risas garantizadas",
-    "mente curiosa",
-    "intriga constante",
-    "suspenso atrapante",
-    "escape total"
+    "Corazón sensible", 
+    "Risas garantizadas",
+    "Mente curiosa",
+    "Intriga constante",
+    "Suspenso atrapante",
+    "Escape total"
   ];
 
   const timeOptions: TimeOption[] = [
-    "menos de 30 minutos",
-    "entre 30 y 90 minutos", 
-    "alrededor de una hora y media",
-    "mas de dos horas"
+    "Menos de 30 minutos",
+    "Entre 30 y 90 minutos", 
+    "Alrededor de una hora y media",
+    "Más de dos horas"
   ];
 
   const audienceOptions: AudienceOption[] = [
@@ -52,18 +53,54 @@ export default function Settings({ isVisible, onClose, onSettingsSave }: Setting
 
   const convertTimeToMinutes = (timeOption: TimeOption): number => {
     switch (timeOption) {
-      case "menos de 30 minutos":
+      case "Menos de 30 minutos":
         return 30;
-      case "entre 30 y 90 minutos":
+      case "Entre 30 y 90 minutos":
         return 60; // Average of 30-90
-      case "alrededor de una hora y media":
+      case "Alrededor de una hora y media":
         return 90;
-      case "mas de dos horas":
+      case "Más de dos horas":
         return 150; // 2.5 hours average
       default:
         return 60;
     }
   };
+
+  const genres = {
+    Action: '1',
+    Thriller: '17',
+    Romance: '14',
+    Drama: '7',
+    Comedy: '4',
+    Documentary: '6',
+    Biography: '31',
+    Mystery: '13',
+    Horror: '11',
+    'Sci-Fi': '15',
+    Fantasy: '9',
+    Adventure: '2',
+  }
+
+  const convertMoodToGenres = (mood: MoodOption): string => {
+    switch (mood) {
+      case "Adrenalina pura":
+        return [genres.Action, genres.Thriller].join(", ");
+      case "Corazón sensible":
+        return [genres.Romance, genres.Drama].join(", ");
+      case "Risas garantizadas":
+        return [genres.Comedy].join(", ");
+      case "Mente curiosa":
+        return [genres.Documentary, genres.Biography].join(", ");
+      case "Intriga constante":
+        return [genres.Mystery].join(", ");
+      case "Suspenso atrapante":
+        return [genres.Horror, genres['Sci-Fi']].join(", ");
+      case "Escape total":
+        return [genres.Fantasy, genres.Adventure].join(", ");
+      default:
+        return '';
+    }
+  }
 
   const handleNext = () => {
     if (currentStep < 3) {
@@ -82,7 +119,8 @@ export default function Settings({ isVisible, onClose, onSettingsSave }: Setting
       const settings: UserSettings = {
         mood: selectedMood,
         availableTime: convertTimeToMinutes(selectedTime),
-        audience: selectedAudience
+        audience: selectedAudience,
+        genres: convertMoodToGenres(selectedMood)
       };
       
       console.log('Settings saved:', settings);

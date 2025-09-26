@@ -176,9 +176,9 @@ export default function Index() {
       <Settings 
         isVisible={isSettingsVisible} 
         onClose={() => setIsSettingsVisible(false)}
-        onSettingsSave={({mood, availableTime, audience}) => {
-          console.log('navigate to suggestion with params', {mood, availableTime, audience});
-          router.push({pathname: '/suggestion', params: {mood, availableTime, audience}});
+        onSettingsSave={({genres, availableTime, audience}) => {
+          console.log('navigate to suggestion with params', {genres, availableTime, audience});
+          router.push({pathname: '/suggestion', params: {genres, availableTime, audience}});
         }}
       />
     </View>
